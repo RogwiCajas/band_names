@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:band_names/models/band.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -105,6 +106,10 @@ class _HomePageState extends State<HomePage> {
               title: const Text("New Band name: "),
               content: TextField(
                 controller: textController,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*$'))
+                ],
               ),
               actions: <Widget>[
                 MaterialButton(
@@ -127,6 +132,11 @@ class _HomePageState extends State<HomePage> {
             title: const Text("New Band Name:"),
             content: CupertinoTextField(
               controller: textController,
+              keyboardType:
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'^-?\d*\.?\d*$'))
+              ],
             ),
             actions: <Widget>[
               CupertinoDialogAction(
